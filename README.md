@@ -1,5 +1,5 @@
 # Python-and-QGIS-2
-Geocodes
+# Geocodes
 Primero, para obtener información de los puntos de las capitales departamentales buscamos información en Google y dimos con el siguiente link. En la carpeta Geocode, se encuentra el código correspondiente en python haciendo scrapping para obtener las capitales departamentales y guardarlas en un csv para poder usarla en QGIS. Para obtener las coordenadas de las capitales departamentales seguimos tres procedimientos.
 
 MMQGIS.
@@ -15,7 +15,7 @@ Entendiendo que el método 2 fue posible porque se trataba de relativamente poco
 
 En la carpeta, están los archivos csv. El archivo Corrientes2.csv es el que contiene los puntos de las capitales municipales.
 
-Shapfiles
+# Shapfiles
 Los archivos shape que usamos como boundaries de Corrientes están aquí. La provincia de Corrientes tiene como IN1 = 18. Es decir, 18 para provincia, 18... para municipios.
 
 Los archivos shape de rutas nacionales se encuentran aquí.
@@ -26,12 +26,12 @@ No encontramos archivos shape sobre calles. Esto es importante porque implica qu
 
 Para obtener las rutas nacionales y provinciales en un mismo shape en QGIS: Vectorial (Vector) >> Herramientas de gestión de datos (Data Management Tools) >> Unir capas vectoriales (Merge Shapefiles to one), ahí seleccionamos las capas de rutas nacionales y provinciales, y la exportamos como shapefile.
 
-Networks
+# Networks
 Creamos esta layer con el objetivo de unir los puntos de las capitales con las rutas para que pueda conectarlas (aquí). Para esto usamos v.distance desde capitales hacia rutas y arrojó los puntos más próximos y la distancia. Luego unimos rutas con distancia en una sola layer.
 
 Tomamos los vértices y calculamos la distancia entre los puntos más próximos y las capitales. A esta layer le añadimos una variable cost que mide el costo en pesos por kilómetro. Para calcularla tomamos el consumo de nafta de un auto promedio (ver aquí), que utiliza 6.2 litros de nafta cada 100 km. Así, este auto promedio consume un litro de nafta cada 16.13 kilómetros.
 
 Por otro lado, el precio promedio de nafta (premium) en Corrientes, a agosto de 2021, es de $ 103,78 por litro de nafta (ver aquí), por lo que el precio de nafta por kilómetro es $ 6.43 ($ 103.78 / 16.13).
 
-Matriz OD
+# Matriz OD
 Teniendo los puntos de las capitales departamentales, las rutas que los unen y el costo promedio por kilómetro, usamos QNEAT para obtener la matriz OD. Se seteó default speed en 90 (km/h) y Topology Tolerance en 0.0001. Es una archivo .csv en la carpeta Matriz OD.
